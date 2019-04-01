@@ -14,7 +14,7 @@ def startProgram():
     elif option == "3":
         remove_file()
     elif option == "4":
-        exit_program()
+        sys.exit
     else:
         print("\nInvalid input")
         startProgram()
@@ -156,10 +156,6 @@ def remove_file():
         else:
             print("Filename " + option + "does not exist")
             startProgram()
-
-def exit_program():
-    print("Thank you and have a nice day!")
-    sys.exit
 
 
 startProgram()
