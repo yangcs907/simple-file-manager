@@ -1,4 +1,5 @@
 import os, sys
+
 def startProgram():
     print("\nHello there! Welcome to file manager")
     print("\nPress 1 to view and update files")
@@ -55,7 +56,6 @@ def fileManager():
             print("Filename does not exist")
             fileManager()
 
-
 def read_file(inputfile):
     with open(inputfile) as file:
         print("\nHere are the contents of " + inputfile)
@@ -63,7 +63,6 @@ def read_file(inputfile):
         print(file_read)
         file.close()
     file_options_goback()
-
 
 def overwite_file(inputfile):
     print("\nWhat would you like to overwrite to " + inputfile + "?")
@@ -161,7 +160,6 @@ def remove_file():
 def exit_program():
     print("Thank you and have a nice day!")
     sys.exit
-
 
 
 startProgram()
