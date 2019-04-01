@@ -1,13 +1,19 @@
-import os, fnmatch
+import os, sys
 def startProgram():
-    print("Hello there! Welcome to file manager")
-    print("\nPress 1 to view and manage files")
+    print("\nHello there! Welcome to file manager")
+    print("\nPress 1 to view and update files")
     print("Press 2 to create a new file")
+    print("Press 3 to remove a file")
+    print("Press 4 to exit out of program")
     option = input("> ")
     if option == "1":
         fileManager()
     elif option == "2":
         create_file()
+    elif option == "3":
+        remove_file()
+    elif option == "4":
+        exit_program()
     else:
         print("\nInvalid input")
         startProgram()
@@ -15,18 +21,16 @@ def startProgram():
 def fileManager():
     print("Here is a list of the files")
     print(" ")
-    file_list = []
-    files=os.listdir("File path goes here") #rename filepath to your current machine
+    files = os.listdir("File path goes here") #rename filepath to your current machine
     for file in files:
         if not "filemanager.py" in file:
             print(file)
-            file_list.append(file)
     print("\nType in filename to manage file or press H to go back to home page")
     option = input("> ")
-    if option == "h":
+    if option == "h" or option == "H":
         startProgram()
     else:
-        if option in file_list:
+        if option in files:
             print(" ")
             print("Press 1 to view contents of " + option)
             print("Press 2 to overwrite contents of " + option)
@@ -112,15 +116,51 @@ def file_options_goback():
         file_options_goback()
 
 def create_file():
+    files = os.listdir("File path goes here") #rename filepath to your current machine
     print("\nInput name of file you want to create")
     print("Or press B to go back")
     file_create = input("> ")
     if file_create == "b" or file_create == "B":
         startProgram()
+    elif file_create in files:
+        print(file_create + " already exists")
+        startProgram()
     else:
         new_file = open(file_create, "w")
         print("Successfully created file " + file_create)
     startProgram()
+
+def remove_file():
+    print("\nWhich file would you like to remove?")
+    files = os.listdir("File path goes here") #rename filepath to your current machine
+    for file in files:
+        if not "filemanager.py" in file:
+            print(file)
+    print("\nType in filename to remove file or press H to go back to home page")
+    option = input("> ")
+    if option == "h" or option == "H":
+        startProgram()
+    else:
+        if option in files:
+            print("\nAre you are you would like to remove the file " + option + "?")
+            print("Y/N")
+            delete = input("> ").lower()
+            if delete == "y":
+                os.remove(option)
+                print("Successfully removed file " + option)
+                startProgram()
+            elif delete == "n":
+                startProgram()
+            else:
+                print("Invalid input")
+                startProgram()
+        else:
+            print("Filename " + option + "does not exist")
+            startProgram()
+
+def exit_program():
+    print("Thank you and have a nice day!")
+    sys.exit
 
 
 
